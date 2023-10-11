@@ -28,7 +28,7 @@ public class TaskFilterAuth extends OncePerRequestFilter{
         String path = request.getRequestURI();
         System.out.println(path);
       
-        if ("/users/".equals(path)){
+        if ("/users/".equals(path) || path.contains("h2")){
           filterChain.doFilter(request, response);
           return;
         };
