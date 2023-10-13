@@ -28,7 +28,7 @@ public class TaskFilterAuth extends OncePerRequestFilter{
         String path = request.getRequestURI();
         System.out.println(path);
       
-        if ("/users/".equals(path) || path.contains("h2")){
+        if (!path.contains("tasks")){
           filterChain.doFilter(request, response);
           return;
         };
@@ -66,7 +66,8 @@ public class TaskFilterAuth extends OncePerRequestFilter{
           response.sendError(401);
           return;
         }
-      
-      filterChain.doFilter(request, response);
+
+        request.setAttribute("idUser",user.getId());
+        filterChain.doFilter(request, response);
   }  
 }
